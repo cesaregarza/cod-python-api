@@ -168,6 +168,8 @@ class API:
             self.mapListUrl = "/ce/v1/title/%s/platform/%s/gameType/mp/communityMapData/availability"
             # game platform type matchId
             self.matchInfoUrl = "/crm/cod/v2/title/%s/platform/%s/fullMatch/%s/%d/en"
+            # game platform matchId
+            self.matchEventsUrl = "/ce/cod/v1/title/%s/platform/%s/match/%d/matchMapEvents"
 
         # Requests
         async def __Request(self, method, url):
@@ -359,6 +361,8 @@ class API:
         async def __matchInfoReq(self, game, platform, type, matchId):
             return await self.__sendRequest(self.matchInfoUrl % (game, platform.value, type, matchId))
 
+        async def __matchEventsReq(self, game, platform, matchId):
+            return await self.__sendRequest(self.matchEventsUrl % (game, platform.value, matchId))
 
     # WZ
     class __WZ(__common):
@@ -534,6 +538,10 @@ class API:
             data = asyncio.run(self._common__matchInfoReq("mw", platform, "mp", matchId))
             return data
 
+        def matchEvents(self, platform, matchId: int):
+            data = asyncio.run(self._common__matchEventsReq("mw", platform, matchId))
+            return data
+
 
     # CW
     class __CW(__common):
@@ -600,6 +608,10 @@ class API:
 
         def matchInfo(self, platform, matchId: int):
             data = asyncio.run(self._common__matchInfoReq("cw", platform, "mp", matchId))
+            return data
+
+        def matchEvents(self, platform, matchId: int):
+            data = asyncio.run(self._common__matchEventsReq("mw", platform, matchId))
             return data
 
 
