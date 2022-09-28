@@ -169,7 +169,7 @@ class API:
             # game platform type matchId
             self.matchInfoUrl = "/crm/cod/v2/title/%s/platform/%s/fullMatch/%s/%d/en"
             # game platform matchId
-            self.matchEventsUrl = "/ce/cod/v1/title/%s/platform/%s/match/%d/matchMapEvents"
+            self.matchEventsUrl = "/ce/v1/title/%s/platform/%s/match/%d/matchMapEvents"
 
         # Requests
         async def __Request(self, method, url):
